@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'QR code Saccner',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        
         appBarTheme: AppBarTheme(backgroundColor: Colors.blue,titleTextStyle: TextStyle(color: Colors.white,fontSize: 20),),
         scaffoldBackgroundColor: Colors.white,
-        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const SplashScreen(),
