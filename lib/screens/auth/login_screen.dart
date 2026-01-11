@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dio/screens/components/common_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,21 +21,26 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 10,left: 5,right: 5),
-        child: Column(children: [
-                 TextFormField(
-                  controller: emailcontroller,
-                  decoration: InputDecoration(
-                    hintText: "Enter Email"
-                  ),
-                 ),
-                 SizedBox(height: 10,),
-                 TextFormField(
-                  controller: passwordcontroller,
-                  decoration: InputDecoration(
-                    hintText: "Enter Password"
-                  ),
-                 ),
+        padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
+        child: Column(
+          children: [
+            TextFormField(
+              controller: emailcontroller,
+              decoration: InputDecoration(hintText: "Enter Email"),
+            ),
+            SizedBox(height: 10),
+            TextFormField(
+              controller: passwordcontroller,
+              decoration: InputDecoration(hintText: "Enter Password"),
+            ),
+            SizedBox(height: 10),
+            CommonButton(
+              onpressed: () {
+                print(emailcontroller.text);
+                print(passwordcontroller.text);
+              },
+              child: Text("Login"),
+            ),
           ],
         ),
       ),
