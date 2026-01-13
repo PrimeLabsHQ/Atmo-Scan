@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dio/cubit/login/login_cubit.dart';
+import 'package:flutter_dio/network_manager.dart/repositry.dart';
 import 'package:flutter_dio/screens/components/common_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,10 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Login Screen',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
+        title: Text('Login Screen', style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
@@ -31,15 +31,36 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 10),
             TextFormField(
               controller: passwordcontroller,
-              decoration: InputDecoration(hintText: "Enter Password"),
+              decoration: InputDecoration(
+                alignLabelWithHint: true,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                maintainHintHeight: false,
+                hintText: "Enter Password",
+
+                suffixIcon: Icon(Icons.remove_red_eye),
+              ),
             ),
             SizedBox(height: 10),
-            CommonButton(
-              onpressed: () {
-                print(emailcontroller.text);
-                print(passwordcontroller.text);
-              },
-              child: Text("Login"),
+            BlocProvider(
+              create: (context) => LoginCubit(),
+              child: BlocBuilder<LoginCubit, LoginState>(
+                builder: (context, state) {
+                  return CommonButton(
+                    onpressed: () {
+                      context.read<LoginCubit>().userlogin(
+                        emailcontroller.text.toString(),
+                        passwordcontroller.text.toString(),
+                      );
+                    },
+                    child: state is LoginLoading
+                        ? CircularProgressIndicator()
+                        : Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                  );
+                },
+              ),
             ),
           ],
         ),
