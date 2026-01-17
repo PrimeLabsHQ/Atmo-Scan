@@ -19,9 +19,12 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoading());
     Repository()
         .Userlogin({"email": emailcontroller, "password": passwordcontroller})
-        .then((value) {
+        .then((value) async {
           emit(LoginSuccess(value));
-             StorageHelper().saveData(value.accessToken!);
+          // Initialize StorageHelper before using it
+          final storageHelper = StorageHelper();
+          await storageHelper.init();
+          await storageHelper.saveData(value.accessToken!);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => LocationScreen()),
