@@ -50,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context.read<LoginCubit>().userlogin(
                         emailcontroller.text.toString(),
                         passwordcontroller.text.toString(),
+                        context
                       );
                     },
                     child: state is LoginLoading
