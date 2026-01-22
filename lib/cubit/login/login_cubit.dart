@@ -22,9 +22,10 @@ class LoginCubit extends Cubit<LoginState> {
         .then((value) async {
           emit(LoginSuccess(value));
           // Initialize StorageHelper before using it
-          final storageHelper = StorageHelper();
-          await storageHelper.init();
-          await storageHelper.saveData(value.accessToken!);
+          // final storageHelper = StorageHelper();
+          // await storageHelper.init();
+          // await storageHelper.saveData(value.accessToken!);
+          await StorageHelper().saveData(value.accessToken!);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => LocationScreen()),
