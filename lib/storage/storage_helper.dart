@@ -22,18 +22,20 @@ class StorageHelper {
   String? getData() {
     return _preferences.getString("user_access_token");
   }
-  Future<bool> saveUserlat(String token) {
-    return _preferences.setString("user_access_token", token);
+  void setUserlat(double lat) {
+     _preferences.setDouble("User_lat", lat);
+  }
+  void clean(){
+    _preferences.clear();
+  }
+  double getUserLat() {
+    return _preferences.getDouble("User_lat") ??0.0;
+  }
+  void setUserlng(double lng) {
+     _preferences.setDouble("User_lng", lng);
   }
 
-  String? getUserLat() {
-    return _preferences.getString("user_access_token");
-  }
-  Future<bool> saveUserlng(String token) {
-    return _preferences.setString("user_access_token", token);
-  }
-
-  String? getUserlng() {
-    return _preferences.getString("user_access_token");
+  double getUserlng() {
+    return _preferences.getDouble("User_lng") ?? 0;
   }
 }
